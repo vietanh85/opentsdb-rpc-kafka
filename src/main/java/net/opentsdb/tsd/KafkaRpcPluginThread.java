@@ -281,7 +281,7 @@ public class KafkaRpcPluginThread extends Thread {
           case ROLLUP:
             // Deserialize the event from the received (opaque) message.
             final List<TypedIncomingData> eventList = 
-              deserializer.deserialize(this, message.message());
+              group.getDeserializer().deserialize(this, message.message());
             if (eventList == null) {
               deserializationErrors.incrementAndGet();
               continue;
@@ -299,7 +299,7 @@ public class KafkaRpcPluginThread extends Thread {
           case REQUEUE_ROLLUP:
           case UID_ABUSE:
             final List<TypedIncomingData> requeuedList = 
-              deserializer.deserialize(this, message.message());
+              group.getDeserializer().deserialize(this, message.message());
             if (requeuedList == null) {
               deserializationErrors.incrementAndGet();
               continue;

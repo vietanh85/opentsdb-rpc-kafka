@@ -137,7 +137,8 @@ public class KafkaRpcPluginGroup implements TimerTask {
     
     final String deser_class = config.getString(
         KafkaRpcPluginConfig.PLUGIN_PROPERTY_BASE + groupID + ".deserializer");
-    if (Strings.isNullOrEmpty(deser_class)) {
+    // if (Strings.isNullOrEmpty(deser_class)) {
+    if (null != deser_class && deser_class != "") {
       throw new IllegalArgumentException("Deserializer class cannot be null or empty.");
     }
     
